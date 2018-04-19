@@ -40,7 +40,6 @@ class CurrencyContainer extends Component {
           <option value="EU">EU</option>
           <option value="MXN">MXN</option>
         </select>
-        <CryptoCard currencyType={this.state.currencyType} />
         {
           this.state.books.map(book => <CryptoCard key={book} currencyType={this.state.currencyType} currentCurrency={this.state.currentCurrency} book={book} />)
         }

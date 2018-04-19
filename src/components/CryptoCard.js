@@ -10,8 +10,6 @@ class CryptoCard extends Component {
     super(props)
 
     this.state = {
-      arrow: GreenArrow,
-      amount: "---",
       last: 0,
       high: 0,
       low: 0,
@@ -20,6 +18,7 @@ class CryptoCard extends Component {
 
     this.setDifference = this.setDifference.bind(this)
     this.getExchangeInfo = this.getExchangeInfo.bind(this)
+    this.selectArrow = this.selectArrow.bind(this)
   }
 
   setDifference(info) {
@@ -43,13 +42,9 @@ class CryptoCard extends Component {
 
   selectArrow () {
     if (this.state.difference < 0) {
-      this.setState({
-        arrow: RedArrow
-      })
+        return RedArrow
     } else {
-      this.setState({
-        arrow: GreenArrow
-      })
+        return GreenArrow
     }
   }
 
@@ -60,7 +55,7 @@ class CryptoCard extends Component {
     return (
       <div className="cryptoCard">
         <h1> { book } </h1>
-        <p> {this.state.last * currentCurrency} {currencyType} </p>
+        <p> {Number(this.state.last / currentCurrency).toFixed(2)} {currencyType} </p>
         <img src={this.selectArrow()}/>
       </div>
     );
