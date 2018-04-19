@@ -5,7 +5,7 @@ import CurrencyContainer from './components/CurrencyContainer.js'
 class App extends Component {
   render() {
     return (
-      <div>
+      <div className="App">
         <CurrencyContainer/>
       </div>
     );
