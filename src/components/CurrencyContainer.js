@@ -1,39 +1,49 @@
 import React, { Component } from 'react';
+import CryptoCard from './CryptoCard'
 import './CurrencyContainer.css';
-import CryptoCard from './CryptoCard.js';
 
 class CurrencyContainer extends Component {
 
   constructor(props) {
     super(props)
     this.state = {
-      currencyType: ""
+      currencyType: 'MXN',
+      books: ['BTC', 'XRP', 'ETH', 'LTC'],
+      currencies: {
+        'DKK': 3.1,
+        'USD': 18.7,
+        'EU': 23.0,
+        'MXN': 1
+      },
+      currentCurrency: 1
     }
   }
 
   componentDidMount() {
-    this.getCurrenctType()
+    this.getCurrencyType()
   }
 
-  getCurrenctType = () => {
+  getCurrencyType = () => {
     var currencyType = document.getElementById("currencyType").value;
     this.setState({
-     currencyType: currencyType
-    })
+     currencyType: currencyType,
+     currentCurrency: this.state.currencies[currencyType]
+   })
   }
 
   render() {
     return (
       <div className="currencyContainer">
-        <select onChange={this.getCurrenctType} id="currencyType" className="convertor">
+        <select onChange={this.getCurrencyType} id="currencyType" className="convertor">
           <option value="DKK">DKK</option>
           <option value="USD">USD</option>
           <option value="EU">EU</option>
           <option value="MXN">MXN</option>
         </select>
-        <CryptoCard
-         currencyType={this.state.currencyType}
-        />
+        <CryptoCard currencyType={this.state.currencyType} />
+        {
+          this.state.books.map(book => <CryptoCard key={book} currencyType={this.state.currencyType} currentCurrency={this.state.currentCurrency} book={book} />)
+        }
       </div>
     );
   }
