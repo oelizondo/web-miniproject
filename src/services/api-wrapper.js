@@ -13,8 +13,6 @@ const books = {
   'LTC': 'ltc_mxn'
 }
 
-let coin
-
 const parseData = res => new Promise(resolve => resolve(res.data.payload))
 
 const filterBook = data => {
@@ -25,6 +23,7 @@ const filterBook = data => {
 }
 
 const getExchangeInfo = book => {
+    console.log(book)
   return {
     last: book['last'],
     high: book['high'],
@@ -36,17 +35,14 @@ const getExchangeInfo = book => {
 export default function socketStart (currency) {
   const availableCoins = Object.keys(books)
   const coinIsAvaiable = (coin) => coin === currency
-  coin = availableCoins.find(coinIsAvaiable)
-
-  console.log(currency)
+  const coin = availableCoins.find(coinIsAvaiable)
 
   return new Promise((resolve, reject) => {
     axios(requestConfig)
     .then(parseData)
-    .then(filterBook)
+    .then(data => filterBook(data, coin))
     .then(getExchangeInfo)
     .then(info => resolve(info))
     .catch(e => reject(e))
   })
 }
-
