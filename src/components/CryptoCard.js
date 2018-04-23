@@ -33,7 +33,7 @@ class CryptoCard extends Component {
   getExchangeInfo () {
     setInterval(() => {
       socketStart(this.props.book).then(info => this.setDifference(info))
-    }, 10000)
+    }, 1000)
   }
 
   componentWillMount() {

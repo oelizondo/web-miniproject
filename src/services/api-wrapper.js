@@ -15,7 +15,7 @@ const books = {
 
 const parseData = res => new Promise(resolve => resolve(res.data.payload))
 
-const filterBook = data => {
+const filterBook = (data, coin) => {
   return new Promise((resolve) => {
     let book = data.filter(book => book['book'] === books[coin])
     resolve(book[0])
