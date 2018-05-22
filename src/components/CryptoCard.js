@@ -41,21 +41,19 @@ class CryptoCard extends Component {
   }
 
   selectArrow () {
-    if (this.state.difference < 0) {
-        return RedArrow
-    } else {
-        return GreenArrow
-    }
+    return this.state.difference < 0 ? RedArrow : GreenArrow
   }
 
 
   render() {
     const { book, currencyType, currentCurrency } = this.props
+    const formattedValue = Number(this.state.last / currentCurrency).toFixed(2)
 
     return (
       <div className="cryptoCard">
         <h1> { book } </h1>
-        <p> {Number(this.state.last / currentCurrency).toFixed(2)} {currencyType} </p>
+        <p> {formattedValue}</p>
+        <p> {currencyType} </p>
         <img src={this.selectArrow()}/>
       </div>
     );

@@ -34,15 +34,17 @@ class CurrencyContainer extends Component {
   render() {
     return (
       <div className="currencyContainer">
-        <select onChange={this.getCurrencyType} id="currencyType" className="convertor">
-          <option value="DKK">DKK</option>
-          <option value="USD">USD</option>
-          <option value="EU">EU</option>
-          <option value="MXN">MXN</option>
-        </select>
         {
           this.state.books.map(book => <CryptoCard key={book} currencyType={this.state.currencyType} currentCurrency={this.state.currentCurrency} book={book} />)
         }
+        <div className="convertor">
+          <select onChange={this.getCurrencyType} id="currencyType">
+            <option value="DKK">DKK</option>
+            <option value="USD">USD</option>
+            <option value="EU">EU</option>
+            <option value="MXN">MXN</option>
+          </select>
+        </div>
       </div>
     );
   }

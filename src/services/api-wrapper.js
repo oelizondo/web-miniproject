@@ -13,21 +13,15 @@ const books = {
   'LTC': 'ltc_mxn'
 }
 
-const parseData = res => new Promise(resolve => resolve(res.data.payload))
+const parseData = res => res.data.payload
 
-const filterBook = (data, coin) => {
-  return new Promise((resolve) => {
-    let book = data.filter(book => book['book'] === books[coin])
-    resolve(book[0])
-  })
-}
+const filterBook = (data, coin) => data.filter(book => book['book'] === books[coin])[0]
 
 const getExchangeInfo = book => {
-    console.log(book)
   return {
     last: book['last'],
     high: book['high'],
-    low: book['low']
+    low:  book['low']
   }
 }
 
